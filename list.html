@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+   <head>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   </head>
+   <body>
+
+      <nav class="navbar navbar-light" style="background-color: #CB5633">
+         <a class="navbar-brand" href="/" style="color:white">Flowers</a>
+         <a class="nav-item" href="enternew" style="color:white">Insert a Sighting <span class="sr-only">(current)</span></a>
+      </nav>
+
+
+
+
+
+
+      <div style="padding: 20px">
+      <table class="table">
+         <thead>
+            <tr>
+            <th scope="col" style="color: #293E17">Common Name</th>
+            <th scope="col" style="color: #293E17">Genus</th>
+            <th scope="col" style="color: #293E17">Species</th>
+            <th scope="col" style="color: #293E17">Update</th>
+            <th scope="col" style="color: #293E17">Sightings</th>
+            </tr>
+         </thead>
+         
+         <tbody>
+         <div for="{% for row in rows %}">
+            <tr>
+
+               <td style="color: #293E17">{{ row["COMNAME"]}}</td>
+               <td>{{row["GENUS"]}}</td>
+               <td>{{row["SPECIES"]}}</td>
+
+               <td>
+                     <form action = "{{ url_for('editFlower') }}" method = "POST">
+                        <button class="btn btn-outline-success btn-sm">Update
+                        <input type="hidden" name="COMNAME"  value="{{ row['COMNAME']}}">
+                        </button>
+                     </form>
+               </td>
+
+
+               <td>
+                     <form action = "{{ url_for('flowerSight') }}" method = "POST">
+                        <button class="btn btn-outline-success btn-sm">Sightings
+                        <input type="hidden" name="COMNAME"  value="{{ row['COMNAME']}}">
+                        </button>
+                     </form>
+               </td>
+            </tr>
+         </div {% endfor %}>
+         </tbody>
+      </table>
+   </div>
+      
+   </body>
+</html>
